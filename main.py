@@ -14,21 +14,12 @@ end_date = date.today()
 
 st.title("TradeInfo")
 
+#Get User Input
 user_input = st.text_input('Enter NSE Code:')
 user_input= user_input.strip()
 
-# def validate_ticker(tickername):
-#     IsTickerValid = False
-    
-#     ticker=yf.Ticker(ticker=tickername+'.NS')
-    
-#     try:
-#         ticker=ticker.info
-#         IsTickerValid=True
-#     except HTTPError as err:
-#         if err.code == 404:
-#             IsTickerValid=False
-#     return IsTickerValid
+
+#Generate short summary for any company, based on the data from Yahoo finance.
 def generate_short_summary(tickername):
     summary = yf.Ticker(tickername+".NS")
     try:
@@ -41,6 +32,7 @@ def generate_short_summary(tickername):
             Short_Description= st.write('Processing data')
     return Short_Description
 
+#Generate a company info using yfinance and passing those key-value pair in a plotly table.
 def generate_info_table(tickername):
     info = yf.Ticker(tickername + ".NS")
     try:
@@ -78,13 +70,13 @@ def generate_info_table(tickername):
     
     return fig
 
-
+#get data from yahoo finance.
 def generate_data(tickername):
     info= yf.Ticker(tickername+'.NS')
     history = info.history(period='3mo')
     return history
 
-
+#Below function is used to generate graphs using plotly.
 def generate_chart(tickername):
     tickername = tickername+'.NS'
     df= yf.download(tickername, start_date, end_date)
@@ -102,6 +94,7 @@ def generate_chart(tickername):
     figure.update_layout(xaxis_title='Date',yaxis_title='Price')
     return figure
 
+#Below function is implemented for finding the 50 day moving average.
 def predict_rally(tickername):
     tickername = tickername+'.NS'
     data= yf.Ticker(ticker=tickername)
@@ -120,8 +113,6 @@ def predict_rally(tickername):
     
     return analysis
 
-
-print(predict_rally('HSCL'))
  
 if user_input:
     
