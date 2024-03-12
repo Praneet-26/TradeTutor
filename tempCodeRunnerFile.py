@@ -1,1 +1,1 @@
-print(todays_date)
+f['Date'],
