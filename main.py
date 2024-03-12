@@ -133,7 +133,7 @@ if user_input:
         st.write(companyinfo)
         st.subheader('Company Info:')
         data = generate_info_table(user_input)
-        st.plotly_chart(data, unsafe_allow_html=True)
+        st.write(data)
         st.subheader('Stock Details (Last 3 Months)')
         st.write(generate_data(user_input))
         st.subheader('Chart')
